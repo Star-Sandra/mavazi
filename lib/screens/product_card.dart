@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+import 'package:mavazi/models/product.dart';
+
+class ProductCard extends StatelessWidget {
+  final Product product;
+
+  const ProductCard({super.key, required this.product});
+
+  @override
+  Widget build (BuildContext context) {
+    return Card(
+      margin: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: Row(
+          children: [
+            Image.network(product.imageUrl, width: 150, height: 150),
+            SizedBox(width: 16),
+            Expanded(
+              child:Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(product.description),
+                  SizedBox(height: 8),
+                  Text('KES ${product.price}')
+          ],)
+        )
+        ],
+      ),
+      )
+    );
+  }
+}
