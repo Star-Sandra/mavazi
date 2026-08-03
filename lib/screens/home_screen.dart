@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mavazi/models/cart.dart';
 import 'package:mavazi/models/product.dart';
 import 'package:mavazi/screens/product_card.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -191,7 +193,19 @@ class _OrdersTab extends StatelessWidget{
 class _ShoppingCartTab extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Cart"));
+    return Consumer<CartModel>(
+      builder: (context, cart, child){
+        if(cart.items.isEmpty){
+          return Center(child: Text("Your Cart is empty!"));
+        }
+        return ListView.builder(
+          itemCount: cart.items.length,
+          itemBuilder: (context, index){
+            var product = cart.items[index];
+            return ProductCard(product: product);
+          },
+        );
+      });
   }
 }
 class _ProfileTab extends StatelessWidget {
