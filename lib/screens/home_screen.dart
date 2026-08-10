@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mavazi/models/cart.dart';
 import 'package:mavazi/models/product.dart';
+import 'package:mavazi/screens/cart_card.dart';
 import 'package:mavazi/screens/product_card.dart';
 import 'package:provider/provider.dart';
 
@@ -30,9 +31,29 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_tabTitle),),
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 95, 20, 15), 
+        foregroundColor: Colors.white,
+        title:Column(
+        children:[
+          Text(_tabTitle),
+          Row(children: [
+            Spacer(flex : 1),          
+            Consumer<CartModel>(
+              builder: (context, cart, child) {
+              return Text(
+               'KES ${cart.getTotalPrice()}',
+                style: TextStyle(fontSize: 12),
+            );
+          },
+        ),
+      ],
+    )
+  ],   
+)
+),      
       body: IndexedStack(index: _selectedIndex, children: _tabs),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(        
         currentIndex: _selectedIndex,
         onTap: _onClickTab, 
         type: BottomNavigationBarType.fixed,
@@ -201,8 +222,16 @@ class _ShoppingCartTab extends StatelessWidget{
         return ListView.builder(
           itemCount: cart.items.length,
           itemBuilder: (context, index){
-            var product = cart.items[index];
-            return ProductCard(product: product);
+            var cartItem = cart.items[index];
+            return CartCard(
+              cartItem: cartItem, 
+              incrementQuantity: () {
+                cart.incrementQuantity(cartItem.product);
+              }, 
+              decrementQuantity: () {
+                cart.decrementQuantity(cartItem.product);
+              },
+            );
           },
         );
       });

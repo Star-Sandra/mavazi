@@ -24,7 +24,7 @@ class ProductCard extends StatelessWidget {
                 children: [
                   Text(product.description),
                   SizedBox(height: 8),
-                  Text('KES ${product.price}'),
+                  Text('KES ${product.price.toString()}'), //*.
                   IconButton(
                     onPressed: () {
                       Provider.of<CartModel>(
