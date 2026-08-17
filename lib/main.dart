@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mavazi/screens/home_screen.dart';
+//import 'package:mavazi/screens/home_screen.dart';
+import 'package:mavazi/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 // import 'package:mavazi/screens/signup_screen.dart';
 import 'package:mavazi/models/cart.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }

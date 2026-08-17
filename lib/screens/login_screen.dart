@@ -11,7 +11,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _loginFormKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _hidePassword = true;
 
@@ -42,11 +42,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 25),
                   TextFormField(
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
+                    controller: _usernameController,
+                    keyboardType: TextInputType.name,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.email_outlined),
-                      labelText: 'Email',
+                      labelText: 'Username',
                       border: OutlineInputBorder(),
                       isDense: true, 
                       contentPadding: EdgeInsets.symmetric(
@@ -56,12 +56,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
+                        return 'Please enter your username';
                       }
-                      if (!value.contains('@')) {
-                        return 'Please enter a valid email';
-                      }
-                      return null;
+                      // if (!value.contains('@')) {
+                      //   return 'Please enter a valid username';
+                      // }
+                      // return null;
                     },
                   ),
 
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green, 
+                      backgroundColor: const Color.fromARGB(255, 62, 2, 4), 
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -127,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const Text("Don't have an account?"),
                       TextButton(
                         onPressed: () {},
-                        child: const Text("Sign Up", style: TextStyle(color: Colors.blue)),
+                        child: const Text("Sign Up", style: TextStyle(color: Color.fromARGB(255, 243, 33, 33))),
                       ),
                     ],
                   ),
@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
